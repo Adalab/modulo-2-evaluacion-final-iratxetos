@@ -1,19 +1,19 @@
-- [] Diagrama de flujo (esquema)
-- [] Hacer la estructura del HTML, css minimo para trabajar
-    - [] Crear un input buscador
-    - [] Crear listado
-- [] Búsqueda
-    - [] Seleccionar los elementos del HTML donde voy a hacer el evento de búsqueda
-    - [] Hacer peticion al servidor FETCH
-    - [] Parsear los datos del servidor .json()
-    - [] crear el enlace cuando realizo el evento (doy a buscar)
-    - [] Crear función manejadora del evento
-    - [] Guardar datos en una variable global 
-    - [] Pintar elementos de la serie en el html: imagen + titulo
-    - [] Agregar imagen default en caso de no haber imagen (función)
+- [x] Diagrama de flujo (esquema)
+- [x] Hacer la estructura del HTML, css minimo para trabajar
+    - [x] Crear un input buscador
+    - [x] Crear listado
+- [x] Búsqueda
+    - [x] Seleccionar los elementos del HTML donde voy a hacer el evento de búsqueda
+    - [x] Hacer peticion al servidor FETCH
+    - [x] Parsear los datos del servidor .json()
+    - [x] crear el enlace cuando realizo el evento (doy a buscar)
+    - [x] Crear función manejadora del evento
+    - [x] Guardar datos en una variable global 
+    - [x] Pintar elementos de la serie en el html: imagen + titulo
+    - [x] Agregar imagen default en caso de no haber imagen (función)
     - [] Ponerlo bonito
 - [] Favoritos
-    - [] Seleccionar los elementos del HTML donde voy a hacer el evento de búsqueda
+    - [] Seleccionar los elementos del HTML donde voy a hacer el evento de favorito
     - [] Escuchar evento sobre CLICK sobre las series
     - [] Crear una funcion manejadora del evento
     - [] Identificar la serie favorita
