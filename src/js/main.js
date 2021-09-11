@@ -5,10 +5,13 @@ const searchButton = document.querySelector('.js-search');
 const inputSerie = document.querySelector('.js-input');
 const seriesContainer = document.querySelector('.js-series-container');
 const seriesFavoriteContainer = document.querySelector('.js-series-favorites-container');
+const seriesListed = document.querySelector('.js-serie');
 
 let series = [];
 let seriesList = [];
 let favorites = [];
+
+let favClass = '';
 
 
 function completeUrl() {
@@ -18,27 +21,56 @@ function completeUrl() {
 }
 
 function showSeriesList() {
+
     for (let serie of series) {
 
-        let photo = serie.show.image;
         let seriesContent = '';
-        if (photo === null) {
+        let photo = serie.show.image;
 
-            seriesContent += `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV"/> ${serie.show.name}</li>`;
+        if (photo === null) {
+            seriesContent = `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV"/> ${serie.show.name}</li>`;
             seriesList += seriesContent;
 
         } else {
-            seriesContent += `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="${serie.show.image.original}"/> ${serie.show.name}</li>`;
+            seriesContent = `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="${serie.show.image.original}"/> ${serie.show.name}</li>`;
             seriesList += seriesContent;
 
         }
+        seriesContainer.innerHTML = seriesList;
 
     }
-    seriesContainer.innerHTML = seriesList;
+
     listenSeries();
+
+}
+
+// function favoriteClass() {
+//     for (let serie of series) {
+//         const isFav = isFavorite(serie);
+//         if (isFav === true) {
+//             favClass = 'fav-class';
+//         } else {
+//             favClass = '';
+//         }
+//         seriesContainer.classList.add(`${favClass}`);
+//     }
+// }
+
+function isFavorite(serie) {
+    const favoriteFound = favorites.find((fav) => {
+        return fav.id === serie.id;
+    });
+    if (favoriteFound === undefined) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 function handleFavorite(ev) {
+    // const selectedSerieClass = ev.currentTarget;
+    // selectedSerieClass.classList.toggle('fav-class');
     const selectedSerie = parseInt(ev.currentTarget.id);
     const objetClicked = series.find((serie) => {
         return serie.show.id === selectedSerie;
@@ -46,52 +78,38 @@ function handleFavorite(ev) {
 
     const favoritesFound = favorites.findIndex((fav) => {
         return fav.show.id === selectedSerie;
+
     }); if (favoritesFound === -1) {
         favorites.push(objetClicked);
 
     } else {
         favorites.splice(favoritesFound, 1);
     }
-    // cada vez que modifico los arrays de series o de orites vuelvo a pintar y a escuchar eventos
-    // showSeriesList();
+    // cada vez que modifico los arrays de series o de favorites vuelvo a pintar y a escuchar eventos
+    listenSeries();
     showSeriesFavorites();
-    ev.preventDefault();
 
 }
 
 function showSeriesFavorites() {
+    listenSeries();
     let serieFavorite = '';
-
     for (let favorite of favorites) {
         let photo = favorite.show.image;
         if (photo === null) {
-            //const isFav = isFavorite(favorite);
-            //dependiendo es valor devuelto tomo la decision si le añado la clase de favorito o no
             serieFavorite += `<li class="series js-serie" id="${favorite.show.id}"><img class="favorites-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV"/> ${favorite.show.name}</li>`;
         } else {
             serieFavorite += `<li class="series js-serie" id="${favorite.show.id}"><img class="favorites-img"  src="${favorite.show.image.original}"/> ${favorite.show.name}</li>`;
         }
         seriesFavoriteContainer.innerHTML = serieFavorite;
     }
-}
-
-function isFavorite(favorite) {
-    const SerieFound = favorites.find((fav) => {
-        return fav.id === favorite.show.id;
-    });
-    //find devuelve undefined si no lo encuentra, es decir sino esta en el array de favoritos
-    //retorno si está o no está en favoritos
-    if (SerieFound === undefined) {
-        //retorno false cuando NO está favoritos
-        return false;
+    if (favorites.length === (0)) {
+        seriesFavoriteContainer.classList.add('hidden');
     } else {
-        //retorno true cuando SI está favoritos
-        return true;
+        seriesFavoriteContainer.classList.remove('hidden');
     }
 
 }
-
-
 
 function listenSeries() {
     let listSeries = document.querySelectorAll('.js-serie');
