@@ -11,7 +11,7 @@ let series = [];
 let seriesList = [];
 let favorites = [];
 
-let favClass = '';
+
 
 
 function completeUrl() {
@@ -21,38 +21,40 @@ function completeUrl() {
 }
 
 function showSeriesList() {
-
+    let seriesContent = '';
+    let favClass = '';
     for (let serie of series) {
-
-        let seriesContent = '';
         let photo = serie.show.image;
-
         if (photo === null) {
-            seriesContent = `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="https://via.placeholder.com/210x295/ffffff/666666/?text=TV"/> ${serie.show.name}</li>`;
-            seriesList += seriesContent;
+            photo = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
 
         } else {
-            seriesContent = `<li class="series js-serie" id="${serie.show.id}"><img class="series-img" src="${serie.show.image.original}"/> ${serie.show.name}</li>`;
-            seriesList += seriesContent;
-
+            photo = photo.original;
         }
-        seriesContainer.innerHTML = seriesList;
+        const isFav = isFavorite(serie);
+        if (isFav) {
+            favClass = 'fav-class';
+        } else {
+            favClass = '';
+        }
+
+        seriesContent += `<li class="series js-serie ${favClass}" id="${serie.show.id}"><img class="series-img" src="${photo}"/> ${serie.show.name}</li>`;
+        // seriesList += seriesContent;
+
 
     }
-
+    seriesContainer.innerHTML = seriesContent;
     listenSeries();
-
 }
 
 // function favoriteClass() {
 //     for (let serie of series) {
 //         const isFav = isFavorite(serie);
-//         if (isFav === true) {
+//         if (isFav) {
 //             favClass = 'fav-class';
 //         } else {
 //             favClass = '';
 //         }
-//         seriesContainer.classList.add(`${favClass}`);
 //     }
 // }
 
@@ -87,6 +89,7 @@ function handleFavorite(ev) {
     }
     // cada vez que modifico los arrays de series o de favorites vuelvo a pintar y a escuchar eventos
     listenSeries();
+    showSeriesList();
     showSeriesFavorites();
 
 }
