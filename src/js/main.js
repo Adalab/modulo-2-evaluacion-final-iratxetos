@@ -5,14 +5,11 @@ const searchButton = document.querySelector('.js-search');
 const inputSerie = document.querySelector('.js-input');
 const seriesContainer = document.querySelector('.js-series-container');
 const seriesFavoriteContainer = document.querySelector('.js-series-favorites-container');
-const seriesListed = document.querySelector('.js-serie');
+//const seriesListed = document.querySelector('.js-serie');
 
 let series = [];
-let seriesList = [];
+//let seriesList = [];
 let favorites = [];
-
-
-
 
 function completeUrl() {
     let userSerie = inputSerie.value.toLowerCase();
@@ -22,7 +19,7 @@ function completeUrl() {
 
 function showSeriesList() {
     let seriesContent = '';
-    let favClass = '';
+
     for (let serie of series) {
         let photo = serie.show.image;
         if (photo === null) {
@@ -31,14 +28,8 @@ function showSeriesList() {
         } else {
             photo = photo.original;
         }
-        const isFav = isFavorite(serie);
-        if (isFav) {
-            favClass = 'fav-class';
-        } else {
-            favClass = '';
-        }
 
-        seriesContent += `<li class="series js-serie ${favClass}" id="${serie.show.id}"><img class="series-img" src="${photo}"/> ${serie.show.name}</li>`;
+        seriesContent += `<li class="series-container__series js-serie" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
         // seriesList += seriesContent;
 
 
@@ -58,21 +49,22 @@ function showSeriesList() {
 //     }
 // }
 
-function isFavorite(serie) {
-    const favoriteFound = favorites.find((fav) => {
-        return fav.id === serie.id;
-    });
-    if (favoriteFound === undefined) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
+// function isFavorite(serie) {
+//     const favoriteFound = favorites.find((fav) => {
+//         return fav.id === serie.id;
+//     });
+//     if (favoriteFound === undefined) {
+//         return false;
+//     }
+//     else {
+//         return true;
+//     }
+// }
 
 function handleFavorite(ev) {
-    // const selectedSerieClass = ev.currentTarget;
-    // selectedSerieClass.classList.toggle('fav-class');
+    const selectedSerieClass = ev.currentTarget;
+    selectedSerieClass.classList.toggle('fav-class');
+    console.log(selectedSerieClass);
     const selectedSerie = parseInt(ev.currentTarget.id);
     const objetClicked = series.find((serie) => {
         return serie.show.id === selectedSerie;
@@ -87,9 +79,10 @@ function handleFavorite(ev) {
     } else {
         favorites.splice(favoritesFound, 1);
     }
+
     // cada vez que modifico los arrays de series o de favorites vuelvo a pintar y a escuchar eventos
     listenSeries();
-    showSeriesList();
+    // showSeriesList();
     showSeriesFavorites();
 
 }

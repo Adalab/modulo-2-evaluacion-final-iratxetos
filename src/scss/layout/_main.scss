@@ -1,10 +1,60 @@
+.page {
+    font-family: $font-main;
+    background-color: $color-grey;
+}
 
-.series-img{
-    width: 30px;
-    height: 45px;
+.series-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__series{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;  
+        padding: 10px;
+        
+        
+
+        &:hover{
+            transform: scale3d(1.1, 1.1, 1.1) ;
+            cursor: pointer;
+            
+        }
+   
+        &--img{
+            width: 150px;
+            height: 220px;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+                        padding: 10px;
+
+            }
+        
+        &--name{
+        font-size: 20px;
+        margin: 5px;  
+        padding: 10px;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+      
+
+        &:hover{
+            text-decoration: line-through;
+            text-decoration-color: rgba(253, 216, 53, 0.575);
+            text-decoration-thickness: 15px;
+            
+        }
+        }
+    } 
 }
 
 .fav-class{
-    background-color: red;
-    font-size: larger;
+    
+    color: $color-dark-grey;
+    background-color: $color-dark-grey;
 }

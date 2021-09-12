@@ -1,0 +1,15 @@
+.header{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+    background-color:$color-dark-grey;
+}
+
+.title{
+    font-family: $font-main;
+    color: $color-yelow;
+    text-align: center;
+}
