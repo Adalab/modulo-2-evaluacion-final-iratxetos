@@ -1,17 +1,24 @@
 /* eslint-disable indent */
 'use strict';
 
+//VARIABLE BOTON BUSCAR
 const searchButton = document.querySelector('.js-search');
+//VARIABLE LI SERIES
 const inputSerie = document.querySelector('.js-input');
+//VARIABLE UL SERIES
 const seriesContainer = document.querySelector('.js-series-container');
-const seriesFavoriteContainer = document.querySelector('.js-series-favorites-container');
+//VARIABLE UL FAVORITOS
+const seriesFavoriteContainer = document.querySelector('.js-favorites__container');
+//VARIABLE BOTON RESET FAVORITOS
 const resetButton = document.querySelector('.js-reset');
-const deleteFav = document.querySelector('.fas');
+//VARIABLE BOTON INDIVIDUAL DE ELIMINAR FAVORITOS
+//const deleteFav = document.querySelector('.fas');
 
 //ARRAISES DE SERIES Y SERIES FAVORITAS
 let series = [];
 let favorites = [];
 
+//STORAGE - GET:NADA MÁS CARGAR LA PÁGINA GUARDA LOS DATOS QUE TENGAN EN FAVORITOS
 function getFavs() {
     if (localStorage.getItem('favorite-serie') !== null) {
         getInLocalStorage();
@@ -19,6 +26,7 @@ function getFavs() {
 }
 getFavs();
 
+//
 function showReset() {
     if (favorites !== []) {
         resetButton.classList.remove('hidden');
@@ -71,8 +79,15 @@ function showSeriesList() {
             favClass = '';
         }
         seriesContainer.innerHTML += `<li class="series-container__series js-serie ${favClass}" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
-
+        // let newItem = document.createElement('li class="series-container__series js-serie ${favClass}" id="${serie.show.id}');
+        // let newPhoto = newItem.createElement('img class="series-container__series--img"');
+        // newPhoto.src = '${photo}';
+        // let newItemText = newItem.createElement('h3 class="series-container__series--name');
+        // let newContent = document.createTextNode('${serie.show.name}');
+        // newItemText.appendChild(newContent);
+        // seriesContainer.appendChild(newItem, newPhoto, newItemText);
     }
+    //ESCUCHO EVENTO CLICK SOBRE SERIE
     listenSeries();
 }
 
@@ -80,12 +95,12 @@ function showSeriesList() {
 function handleFavorite(ev) {
     // const selectedSerieClass = ev.currentTarget;
     // selectedSerieClass.classList.toggle('favorite-serie');
-
     const selectedSerie = parseInt(ev.currentTarget.id);
+    //DEVUELVE EL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const objetClicked = series.find((serie) => {
         return serie.show.id === selectedSerie;
     });
-
+    //DEVUELVE LA POSICIÓN DEL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const favoritesFound = favorites.findIndex((fav) => {
         return fav.show.id === selectedSerie;
 
@@ -96,7 +111,7 @@ function handleFavorite(ev) {
         favorites.splice(favoritesFound, 1);
     }
 
-    // cada vez que modifico los arrays de series o de favorites vuelvo a pintar y a escuchar eventos
+    // AL MODIFICAR ARRAYS DE SERIES Y FAVOS TENGO QUE PINTAR Y ESCUCHAR EVENTOS
     setInLocalStorage();
     showSeriesList();
     showSeriesFavorites();
@@ -122,6 +137,7 @@ function resetFavorites(ev) {
     showSeriesFavorites();
     ev.preventDefault();
     showSeriesList();
+    //STORAGE - CLEAR: VACÍA LOCAL STORAGE
     localStorage.clear();
 }
 
@@ -136,11 +152,11 @@ function showSeriesFavorites() {
         } else {
             photo = photo.original;
         }
-        serieFavorite += `<li class="series-favorites-container__favseries js-serie" id="${favorite.show.id}"><img class="series-favorites-container__favseries--img" src="${photo}"/><h3 class="series-favorites-container__favseries--name">${favorite.show.name}</h3></li><i class="fas fa-trash-alt"></i>`;
+        serieFavorite += `<li class="favorites__container--favseries  js-serie" id="${favorite.show.id}"><img class="favorites-img"  src="${photo}"/><h3 class="favorites-name">${favorite.show.name}</h3></li><i class="fas fa-trash-alt"></i>`;
     }
 
     seriesFavoriteContainer.innerHTML = serieFavorite;
-
+    //OCULTA LAS SECCIÓN DE SERIES FAVORITAS EN CASO DE NO HABERLAS
     if (favorites.length === (0)) {
         seriesFavoriteContainer.classList.add('hidden');
     } else {
@@ -149,16 +165,16 @@ function showSeriesFavorites() {
     setInLocalStorage();
 }
 
-//STORE - SET: GUARDAR DATA
+//STORAGE - SET: GUARDAR DATA DE USUARIO
 function setInLocalStorage() {
-
+    //CONVERTIMOS DE OBJETO A CADENA
     const stringSeries = JSON.stringify(favorites);
     localStorage.setItem('favorite-serie', stringSeries);
-
 }
 
-//STORE - GET: RECOGER DATA DE USUARIO
+//STORERAGE - GET: RECUPERAR DATA DE USUARIO
 function getInLocalStorage() {
+    //CONVERTIMOS DE UNA CADENA A UN OBJETO
     favorites = JSON.parse(localStorage.getItem('favorite-serie'));
     showSeriesFavorites();
 }
@@ -168,6 +184,7 @@ searchButton.addEventListener('click', getFromApi);
 
 //EVENTO -> CLICK EN CADA SERIE LISTADA
 function listenSeries() {
+    //VARIABLE QUE SELECCIONA TODAS LAS SERIES MOSTRADAS
     let listSeries = document.querySelectorAll('.js-serie');
     for (const serieEl of listSeries) {
         serieEl.addEventListener('click', handleFavorite);
