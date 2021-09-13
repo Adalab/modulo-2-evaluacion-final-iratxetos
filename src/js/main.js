@@ -6,7 +6,7 @@ const inputSerie = document.querySelector('.js-input');
 const seriesContainer = document.querySelector('.js-series-container');
 const seriesFavoriteContainer = document.querySelector('.js-series-favorites-container');
 const resetButton = document.querySelector('.js-reset');
-
+const deleteFav = document.querySelector('.fas');
 
 //ARRAISES DE SERIES Y SERIES FAVORITAS
 let series = [];
@@ -136,7 +136,7 @@ function showSeriesFavorites() {
         } else {
             photo = photo.original;
         }
-        serieFavorite += `<li class="series js-serie" id="${favorite.show.id}"><img class="favorites-img" src="${photo}"/> ${favorite.show.name}</li>`;
+        serieFavorite += `<li class="series-favorites-container__favseries js-serie" id="${favorite.show.id}"><img class="series-favorites-container__favseries--img" src="${photo}"/><h3 class="series-favorites-container__favseries--name">${favorite.show.name}</h3></li><i class="fas fa-trash-alt"></i>`;
     }
 
     seriesFavoriteContainer.innerHTML = serieFavorite;
