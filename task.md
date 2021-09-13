@@ -11,16 +11,16 @@
     - [x] Guardar datos en una variable global 
     - [x] Pintar elementos de la serie en el html: imagen + titulo
     - [x] Agregar imagen default en caso de no haber imagen (función)
-    - [] Ponerlo bonito
+    - [X] Ponerlo bonito
 - [] Favoritos
-    - [] Seleccionar los elementos del HTML donde voy a hacer el evento de favorito
-    - [] Escuchar evento sobre CLICK sobre las series
-    - [] Crear una funcion manejadora del evento
-    - [] Identificar la serie favorita
-    - [] Añadir o quitar la clase en el HTML de las series favoritas
-    - [] Añadir a un array de las series favorits
-    - [] Pintar el array de series favoritas en la izquierda del html y que sumar en la medida que vayan clicando
-- [] Localstorage
+    - [X] Seleccionar los elementos del HTML donde voy a hacer el evento de favorito
+    - [X] Escuchar evento sobre CLICK sobre las series
+    - [x] Crear una funcion manejadora del evento
+    - [x] Identificar la serie favorita
+    - [x] Añadir o quitar la clase en el HTML de las series favoritas
+    - [x] Añadir a un array de las series favorits
+    - [x] Pintar el array de series favoritas en la izquierda del html y que sumar en la medida que vayan clicando
+- [x] Localstorage
 - [] BONUS: Borrar favoritos
 - [] BONUS: Afinar maquetación
 
