@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ejercicio técnico Iratxe</title>
+  <!-- Fuentes de Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Link a fontawesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!-- Link a estilos -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/images/n.png" />
+</head>
+
+<body class="body">
+  <!-- Titulo principal -->
+  <!-- titulo de la página -->
+  <header class="header">
+      <img class="header__logo" alt="logo image" src="../assets/images/net.png" /><img class="header__title">
+
+  </header>
+  <div class="container">
+    <!-- Buscador y listado de series -->
+    <!-- listado de series buscadas
+    <main class="main">
+        <div class="main__searcher">
+            <h2 class="main__searcher__title">
+                Buscador de series
+            </h2>
+            <section class="main__searcher__finder">
+                <input type="text" class="main__searcher__finder--input js-input"
+                    placeholder="Introduce el nombre de la serie">
+                <input type="button" class="main__searcher__finder--search js-search" value="Buscar"></input>
+            </section>
+        </div>
+        <div class="main__search">
+            <ul class="js-series-container series-container"></ul>
+        </div>
+    </main> -->
+    <!-- Listado de series favoritas -->
+    <!-- listado de series buscadas -->
+    <main class="main">
+
+        <div class="main__searcher">
+            <h2 class="main__searcher__title">
+                Buscador de series
+            </h2>
+            <section class="main__searcher__finder">
+                <input type="text" class="main__searcher__finder--input js-input"
+                    placeholder="Introduce el nombre de la serie">
+                <input type="button" class="main__searcher__finder--search js-search" value="Buscar"></input>
+            </section>
+        </div>
+
+        <div class="main__container">
+
+            <section class="favorites">
+                <h2 class="favorites__title">
+                    Mis series favoritas
+                </h2>
+
+                <div class="favorites__container js-favorites__container">
+                </div>
+
+                <input type="button" class="favorites__reset js-reset" value="Reset"></input>
+
+            </section>
+
+            <div class="main__search">
+                <ul class="js-series-container series-container"></ul>
+            </div>
+        </div>
+
+    </main>
+  </div>
+  <!-- Link a Js -->
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

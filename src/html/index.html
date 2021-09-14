@@ -9,20 +9,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Link a fontawesome -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <!-- Link a estilos -->
   <link rel="stylesheet" href="./assets/css/main.css" />
   <!-- Favicon -->
-  <link rel="icon" href="./assets/images/pop.png" />
+  <link rel="icon" href="../assets/images/n.png" />
 </head>
 
 <body class="body">
   <!-- Titulo principal -->
   <include src="./partials/header.html"></include>
-  <!-- Buscador y listado de series -->
-  <include src="./partials/main.html"></include>
-  <!-- Listado de series favoritas -->
-  <include src="./partials/aside.html"></include>
-
+  <div class="container">
+    <!-- Buscador y listado de series -->
+    <include src="./partials/main.html"></include>
+    <!-- Listado de series favoritas -->
+    <include src="./partials/aside.html"></include>
+  </div>
   <!-- Link a Js -->
   <script src="./assets/js/main.js"></script>
 </body>
