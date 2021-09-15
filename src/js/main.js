@@ -13,6 +13,7 @@ const seriesFavoriteContainer = document.querySelector('.js-favorites__container
 const resetButton = document.querySelector('.js-reset');
 //VARIABLE BOTON INDIVIDUAL DE ELIMINAR FAVORITOS
 //const deleteFav = document.querySelector('.fas');
+const logButton = document.querySelector('.favorites-log');
 
 //ARRAISES DE SERIES Y SERIES FAVORITAS
 let series = [];
@@ -78,7 +79,15 @@ function showSeriesList() {
         } else {
             favClass = '';
         }
-        seriesContainer.innerHTML += `<li class="series-container__series js-serie ${favClass}" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
+
+        let time = serie.show.schedule.time;
+        if (time === '') {
+            time = "no available";
+        } else {
+            time = serie.show.schedule.time;
+        }
+
+        seriesContainer.innerHTML += `<li class="series-container__series js-serie ${favClass}" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h4 class="series-time"> ${time}</h4><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
         // let newItem = document.createElement('li class="series-container__series js-serie ${favClass}" id="${serie.show.id}');
         // let newPhoto = newItem.createElement('img class="series-container__series--img"');
         // newPhoto.src = '${photo}';
@@ -191,5 +200,12 @@ function listenSeries() {
     }
 }
 
+function showLog() {
+    for (let serie of series) {
+        console.log(`${serie.show.name}`);
+    }
+}
 //EVENTO -> RESET FAVORITOS
 resetButton.addEventListener('click', resetFavorites);
+
+logButton.addEventListener('click', showLog);
