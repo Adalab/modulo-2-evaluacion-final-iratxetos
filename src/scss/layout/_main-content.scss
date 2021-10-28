@@ -24,7 +24,7 @@
             // padding: 10px;
             
              &:hover{
-                transform: scale3d(1.1, 1.1, 1.1) ;
+               
                 cursor: pointer;
                 text-decoration: line-through;
                 text-decoration-color: rgba(252, 221, 82, 0.418);
@@ -40,20 +40,22 @@
                 }
             
         .favorites-name{
-            font-size: 20px;
+            font-size: 15px;
             color: white;
             margin: 5px;  
             padding: 10px;
             // background-color: white;
-            width: 100%;
+            width: 70%;
+            align-self: flex-start;
            // text-align: center;
             }
             
             .fas {
                 font-size: 30px;
                 color: $color-quasi-yelow;
-                transform: translate(-30px, 110px);
+                transform: translate(60px, -40px);
                 cursor: pointer;
+                
                } 
     }
 

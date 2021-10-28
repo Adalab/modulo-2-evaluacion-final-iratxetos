@@ -3,7 +3,7 @@
 
 //VARIABLE BOTON BUSCAR
 const searchButton = document.querySelector('.js-search');
-//VARIABLE LI SERIES
+//VARIABLE ESCRITA POR EL USER
 const inputSerie = document.querySelector('.js-input');
 //VARIABLE UL SERIES
 const seriesContainer = document.querySelector('.js-series-container');
@@ -13,11 +13,13 @@ const seriesFavoriteContainer = document.querySelector('.js-favorites__container
 const resetButton = document.querySelector('.js-reset');
 //VARIABLE BOTON INDIVIDUAL DE ELIMINAR FAVORITOS
 //const deleteFav = document.querySelector('.fas');
-const logButton = document.querySelector('.favorites-log');
+//const logButton = document.querySelector('.favorites-log');
+
 
 //ARRAISES DE SERIES Y SERIES FAVORITAS
 let series = [];
 let favorites = [];
+// let isFav='';
 
 //STORAGE - GET:NADA MÁS CARGAR LA PÁGINA GUARDA LOS DATOS QUE TENGAN EN FAVORITOS
 function getFavs() {
@@ -72,9 +74,7 @@ function showSeriesList() {
         } else {
             photo = photo.original;
         }
-
-        const isFav = isFavorite(serie);
-        if (isFav === true) {
+        if (isFavorite === true) {
             favClass = 'favorite-serie';
         } else {
             favClass = '';
@@ -82,7 +82,7 @@ function showSeriesList() {
 
         let time = serie.show.schedule.time;
         if (time === '') {
-            time = "no available";
+            time = 'no available';
         } else {
             time = serie.show.schedule.time;
         }
@@ -105,10 +105,12 @@ function handleFavorite(ev) {
     // const selectedSerieClass = ev.currentTarget;
     // selectedSerieClass.classList.toggle('favorite-serie');
     const selectedSerie = parseInt(ev.currentTarget.id);
+    // console.log(selectedSerie);
     //DEVUELVE EL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const objetClicked = series.find((serie) => {
         return serie.show.id === selectedSerie;
     });
+    // console.log(objetClicked);
     //DEVUELVE LA POSICIÓN DEL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const favoritesFound = favorites.findIndex((fav) => {
         return fav.show.id === selectedSerie;
@@ -161,7 +163,7 @@ function showSeriesFavorites() {
         } else {
             photo = photo.original;
         }
-        serieFavorite += `<li class="favorites__container--favseries  js-serie" id="${favorite.show.id}"><img class="favorites-img"  src="${photo}"/><h3 class="favorites-name">${favorite.show.name}</h3></li><i class="fas fa-trash-alt"></i>`;
+        serieFavorite += `<li class="favorites__container--favseries  js-seriefavorite" id="${favorite.show.id}"><img class="favorites-img"  src="${photo}"/><h3 class="favorites-name">${favorite.show.name}</h3><i class="fas fa-trash-alt js-icon"></i></li>`;
     }
 
     seriesFavoriteContainer.innerHTML = serieFavorite;
@@ -172,6 +174,8 @@ function showSeriesFavorites() {
         seriesFavoriteContainer.classList.remove('hidden');
     }
     setInLocalStorage();
+
+
 }
 
 //STORAGE - SET: GUARDAR DATA DE USUARIO
@@ -200,12 +204,45 @@ function listenSeries() {
     }
 }
 
-function showLog() {
-    for (let serie of series) {
-        console.log(`${serie.show.name}`);
-    }
-}
+//  function showLog() {
+//   for (let serie of series) {
+//         console.log(`${serie.show.name}`);
+//     }
+// }
 //EVENTO -> RESET FAVORITOS
 resetButton.addEventListener('click', resetFavorites);
 
-logButton.addEventListener('click', showLog);
+// logButton.addEventListener('click', showLog);
+
+//EVENTO -> RESET FAVORITOS
+resetButton.addEventListener('click', resetFavorites);
+
+//EVENTO -> RESET FAVORITO INDIVIDUAL
+function listenFavorites() {
+    let deleteIcons = document.querySelectorAll('.js-seriefavorite');
+    for (const deleteIcon of deleteIcons) {
+        deleteIcon.addEventListener('click', deleteFavorite);
+    }
+
+}
+
+//ELIMINA EL FAVORITO DEL ARRAY Y DE LA VISTA
+function deleteFavorite(ev) {
+    let selectedFavoriteCard = (ev.currentTarget);
+    let selectedFavorite = (ev.currentTarget.id);
+
+    const objetClicked = favorites.find((favorite) => {
+        return favorite.show.id === selectedFavorite;
+    });
+
+    const favoritesFound = favorites.findIndex((fav) => {
+        return fav.show.id === selectedFavorite;
+    }); if (favoritesFound === -1) {
+        favorites.splice(favoritesFound, 1);
+    } else {
+        favorites.push(objetClicked);
+    }
+    selectedFavoriteCard.classList.toggle('hidden');
+}
+
+listenFavorites();
