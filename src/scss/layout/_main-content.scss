@@ -6,20 +6,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+    @include tablet {
+               align-items: flex-start;       
+     }
 
     &__title{
         margin:10px 0px ;
         color: $color-quasi-yelow;
         text-align: center;
-    }
+
+           }
  
     &__container{
         display:flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        
-    
+           
         &--favseries{
             display:flex;
             flex-direction: column;
@@ -60,6 +64,10 @@
                 color: $color-quasi-yelow;
                 transform: translate(60px, -40px);
                 cursor: pointer;
+
+                @include tablet {
+                    transform: translate(60px, -30px);
+                }
                 
             } 
     }
@@ -74,6 +82,10 @@
         background-color: $color-quasi-yelow;
         font-weight: bolder;
         font-family: $font-main;
+
+        @include tablet {
+            width: 150px;
+         }
         
         
     
@@ -88,19 +100,30 @@
     
     .series-container{
         display:grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-gap: 10px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+
+        @include tablet {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+         }
+
+        @include desktop{
+            grid-template-columns: repeat(5, 1fr);  
+            
+         }
         
-        // align-items: center;
-        // justify-content: center;
     
         &__series{
             display:flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 10px;  
-            padding: 10px;
+             
+            @include tablet {
+                padding: 10px;
+                margin: 10px;
+             }
             
              &:hover{
                 transform: scale3d(1.1, 1.1, 1.1) ;
@@ -111,12 +134,18 @@
                 }
        
             &--img{
-                width: 150px;
-                height: 220px;
+                width: 130px;
+                height: 180px;
                 border-radius: 2px;
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
                 padding: 10px;
-                margin: 10px 0px;
+              
+                @include tablet {
+                    width: 150px;
+                    height: 220px;
+                    margin: 10px 0px;
+                 }
+                
                 }
             
             &--name{
@@ -132,6 +161,7 @@
             &--time{
                 font-size: 10px;
                 padding: 5px;
+                color: $color-quasi-yelow;
             }
         } 
     }

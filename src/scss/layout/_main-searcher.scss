@@ -2,13 +2,25 @@
 .main__searcher{
 display: flex;
 flex-direction: column;
-// justify-content: space-between;
 margin: 10px 20px;
 
+@include tablet {
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: flex-start;
+         padding: 0px 10px;
+     }
+
+
 &__title{
-//padding: 20px;
 color: $color-quasi-yelow;
 align-self: center;
+@include tablet {
+  align-self: flex-start;
+  padding-top: 10px;
+
+}
+
 }
 
 &__finder{
@@ -16,7 +28,10 @@ align-self: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    //padding: 20px;
+
+    @include tablet {
+        align-items: flex-end;
+    }
 
        &--input {
         height: 35px;
@@ -26,7 +41,11 @@ align-self: center;
         border-radius: 20px;
         border-style: none;
         text-align: center;
+       
+        @include tablet {
+            width: 300px;
         }
+    }
       
        &--search {
         height: 35px;
@@ -38,6 +57,10 @@ align-self: center;
         background-color: $color-quasi-yelow;
         font-weight: bolder;
         font-family: $font-main;
+
+        @include tablet {
+            width: 150px;
+        }
 
        &:hover{
         background-color: $color-dark-grey;
