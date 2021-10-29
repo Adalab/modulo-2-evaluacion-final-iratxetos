@@ -2,10 +2,15 @@
     background-color: $color-dark-grey;
     padding: 20px;
     margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     &__title{
         margin:10px 0px ;
         color: $color-quasi-yelow;
+        text-align: center;
     }
  
     &__container{
@@ -24,13 +29,13 @@
             // padding: 10px;
             
              &:hover{
-               
                 cursor: pointer;
                 text-decoration: line-through;
                 text-decoration-color: rgba(252, 221, 82, 0.418);
                 text-decoration-thickness: 15px;
                 }
             }
+
        .favorites-img{
                 width: 150px;
                 height: 220px;
@@ -47,22 +52,22 @@
             // background-color: white;
             width: 70%;
             align-self: flex-start;
-           // text-align: center;
+           //text-align: center;
             }
             
-            .fas {
-                font-size: 30px;
+        .fas {
+                font-size: 15px;
                 color: $color-quasi-yelow;
                 transform: translate(60px, -40px);
                 cursor: pointer;
                 
-               } 
+            } 
     }
 
     &__reset{
    
         height: 35px;
-        width: 90px;
+        width: 90%;
         padding: 0 10px;
         border-radius: 20px;
         border-style: none;
@@ -111,17 +116,23 @@
                 border-radius: 2px;
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
                 padding: 10px;
+                margin: 10px 0px;
                 }
             
             &--name{
-            font-size: 20px;
+            font-size: 15px;
             color: white;
             margin: 5px;  
-            padding: 10px;
+            padding: 5px;
             // background-color: white;
             width: 100%;
             text-align: center;
                   }
+
+            &--time{
+                font-size: 10px;
+                padding: 5px;
+            }
         } 
     }
     }
@@ -130,6 +141,7 @@
         color: $color-dark-grey;
         background-color: $color-dark-grey;
     }
+
 
 
 .hidden{

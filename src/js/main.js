@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable indent */
 'use strict';
 
@@ -12,14 +13,14 @@ const seriesFavoriteContainer = document.querySelector('.js-favorites__container
 //VARIABLE BOTON RESET FAVORITOS
 const resetButton = document.querySelector('.js-reset');
 //VARIABLE BOTON INDIVIDUAL DE ELIMINAR FAVORITOS
-//const deleteFav = document.querySelector('.fas');
+// const deleteFav = document.querySelector('.js-icon');
 //const logButton = document.querySelector('.favorites-log');
 
 
 //ARRAISES DE SERIES Y SERIES FAVORITAS
 let series = [];
 let favorites = [];
-// let isFav='';
+
 
 //STORAGE - GET:NADA MÁS CARGAR LA PÁGINA GUARDA LOS DATOS QUE TENGAN EN FAVORITOS
 function getFavs() {
@@ -28,8 +29,7 @@ function getFavs() {
     }
 }
 getFavs();
-
-//
+//MUESTRA O ELIMINA EL BOTON RESET
 function showReset() {
     if (favorites !== []) {
         resetButton.classList.remove('hidden');
@@ -87,30 +87,23 @@ function showSeriesList() {
             time = serie.show.schedule.time;
         }
 
-        seriesContainer.innerHTML += `<li class="series-container__series js-serie ${favClass}" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h4 class="series-time"> ${time}</h4><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
-        // let newItem = document.createElement('li class="series-container__series js-serie ${favClass}" id="${serie.show.id}');
-        // let newPhoto = newItem.createElement('img class="series-container__series--img"');
-        // newPhoto.src = '${photo}';
-        // let newItemText = newItem.createElement('h3 class="series-container__series--name');
-        // let newContent = document.createTextNode('${serie.show.name}');
-        // newItemText.appendChild(newContent);
-        // seriesContainer.appendChild(newItem, newPhoto, newItemText);
+        seriesContainer.innerHTML += `<li class="series-container__series js-serie ${favClass}" id="${serie.show.id}"><img class="series-container__series--img" src="${photo}"/><h4 class="series-container__series--time"> ${time}</h4><h3 class="series-container__series--name">${serie.show.name}</h3></li>`;
     }
+
     //ESCUCHO EVENTO CLICK SOBRE SERIE
     listenSeries();
+    listenFavorites();
+    listenDeleteIcons();
 }
 
 //SUMA - SERIES FAVORITAS
 function handleFavorite(ev) {
-    // const selectedSerieClass = ev.currentTarget;
-    // selectedSerieClass.classList.toggle('favorite-serie');
     const selectedSerie = parseInt(ev.currentTarget.id);
-    // console.log(selectedSerie);
     //DEVUELVE EL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const objetClicked = series.find((serie) => {
         return serie.show.id === selectedSerie;
     });
-    // console.log(objetClicked);
+
     //DEVUELVE LA POSICIÓN DEL PRIMER ELEMENTO QUE CUMPLA LA CONDICION EN EL ARRAY
     const favoritesFound = favorites.findIndex((fav) => {
         return fav.show.id === selectedSerie;
@@ -150,6 +143,7 @@ function resetFavorites(ev) {
     showSeriesList();
     //STORAGE - CLEAR: VACÍA LOCAL STORAGE
     localStorage.clear();
+    showReset();
 }
 
 //MUESTRA - SERIES FAVORITAS
@@ -163,19 +157,19 @@ function showSeriesFavorites() {
         } else {
             photo = photo.original;
         }
-        serieFavorite += `<li class="favorites__container--favseries  js-seriefavorite" id="${favorite.show.id}"><img class="favorites-img"  src="${photo}"/><h3 class="favorites-name">${favorite.show.name}</h3><i class="fas fa-trash-alt js-icon"></i></li>`;
+        serieFavorite += `<li class="favorites__container--favseries  js-seriefavorite" id="${favorite.show.id}"><img class="favorites-img"  src="${photo}"/><h3 class="favorites-name">${favorite.show.name}</h3><i class="fas fa-trash-alt js-icon id="${favorite.show.id}"></i></li>`;
     }
-
     seriesFavoriteContainer.innerHTML = serieFavorite;
+
     //OCULTA LAS SECCIÓN DE SERIES FAVORITAS EN CASO DE NO HABERLAS
     if (favorites.length === (0)) {
         seriesFavoriteContainer.classList.add('hidden');
     } else {
         seriesFavoriteContainer.classList.remove('hidden');
     }
+    listenFavorites();
+    listenDeleteIcons();
     setInLocalStorage();
-
-
 }
 
 //STORAGE - SET: GUARDAR DATA DE USUARIO
@@ -195,35 +189,34 @@ function getInLocalStorage() {
 //EVENTO -> BUSCADOR
 searchButton.addEventListener('click', getFromApi);
 
+
 //EVENTO -> CLICK EN CADA SERIE LISTADA
 function listenSeries() {
-    //VARIABLE QUE SELECCIONA TODAS LAS SERIES MOSTRADAS
     let listSeries = document.querySelectorAll('.js-serie');
     for (const serieEl of listSeries) {
         serieEl.addEventListener('click', handleFavorite);
     }
 }
 
+//*ENTREVISTA TÉCNICA
 //  function showLog() {
 //   for (let serie of series) {
 //         console.log(`${serie.show.name}`);
 //     }
 // }
-//EVENTO -> RESET FAVORITOS
-resetButton.addEventListener('click', resetFavorites);
 
 // logButton.addEventListener('click', showLog);
 
+
 //EVENTO -> RESET FAVORITOS
 resetButton.addEventListener('click', resetFavorites);
 
-//EVENTO -> RESET FAVORITO INDIVIDUAL
+//EVENTO -> ESCUCHA EL CLICK SOBRE SERIE FAVORITA INDIVIDUAL
 function listenFavorites() {
-    let deleteIcons = document.querySelectorAll('.js-seriefavorite');
-    for (const deleteIcon of deleteIcons) {
-        deleteIcon.addEventListener('click', deleteFavorite);
+    let deleteFavs = document.querySelectorAll('.js-seriefavorite');
+    for (const deleteFav of deleteFavs) {
+        deleteFav.addEventListener('click', deleteFavorite);
     }
-
 }
 
 //ELIMINA EL FAVORITO DEL ARRAY Y DE LA VISTA
@@ -243,6 +236,18 @@ function deleteFavorite(ev) {
         favorites.push(objetClicked);
     }
     selectedFavoriteCard.classList.toggle('hidden');
+    setInLocalStorage();
 }
 
+function listenDeleteIcons() {
+    let deleteIcons = document.querySelectorAll('.js-icon');
+    for (const deleteIcon of deleteIcons) {
+        deleteIcon.addEventListener('click', deleteFavorite);
+
+    }
+}
+
+
+listenDeleteIcons();
 listenFavorites();
+
