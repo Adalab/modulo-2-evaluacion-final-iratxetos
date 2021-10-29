@@ -1,43 +1,39 @@
 {
-	"name": "adalab-web-starter-kit",
-	"version": "3.0.1",
-	"description": "Adalab web starter kit",
+	"name": "mi-primera-web",
+	"homepage": "./",
+	"version": "0.1.0",
+	"private": true,
 	"dependencies": {
-		"browser-sync": "^2.26.12",
-		"del": "^5.1.0",
-		"eslint": "^7.1.0",
-		"gulp": "^4.0.2",
-		"gulp-autoprefixer": "*",
-		"gulp-clean-css": "*",
-		"gulp-combine-mq": "*",
-		"gulp-concat": "*",
-		"gulp-html-tag-include": "^1.0.1",
-		"gulp-notify": "*",
-		"gulp-plumber": "*",
-		"gulp-rename": "*",
-		"gulp-sass": "^5.0.0",
-		"gulp-sourcemaps": "*",
-		"gulp-uglify-es": "^2.0.0",
-		"gulp-zip": "*",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^11.2.7",
+		"@testing-library/user-event": "^12.8.3",
 		"node-sass": "^6.0.1",
-		"run-sequence": "*",
-		"sass": "^1.35.2"
-	},
-	"devDependencies": {
-		"lodash.template": ">=4.5.0"
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "4.0.3",
+		"web-vitals": "^1.1.2"
 	},
 	"scripts": {
-		"start": "./node_modules/.bin/gulp",
-		"docs": "rm -rf docs && ./node_modules/.bin/gulp docs",
-		"push-docs": "rm -rf docs && gulp docs && git add docs/* && git commit -m \"Update docs\" && git push",
-		"deploy": "npm run push-docs",
-		"githubpages": "rm -rf build ; rm -rf docs && npm run build && mv build docs && git add docs/* && git commit -m \"Publish in GitHub Pages\" && git push"
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"githubpages": "rm -rf build && rm -rf docs && npm run build && mv build docs && git add docs/* && git commit -m \"Publish in GitHub Pages\" && git push"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com:Adalab/adalab-web-starter-kit.git"
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
 	},
-	"author": "Adalab",
-	"license": "MIT",
-	"homepage": "https://github.com/adalab/adalab-web-starter-kit"
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
